@@ -1,4 +1,4 @@
-// Tabela de taxas de câmbio (em relação ao USD)
+// Tabela de taxas de câmbio 
 const taxasCambio = {
     "USD": 1,
     "EUR": 0.85,
@@ -15,11 +15,16 @@ const taxasCambio = {
     return !isNaN(valorNumerico) && isFinite(valorNumerico) && valorNumerico > 0;
   };
   
-  // Função para exibir uma mensagem de erro na interface
-  const exibirErro = (mensagem) => {
+  // Função para exibir uma mensagem de erro na interface Requisito de Validação
+  const exibirErro = (mensagem) => mensagem;
+
+  const atualizarMensagemErro = (mensagem) => {
     document.getElementById('mensagemErro').innerText = mensagem;
   };
-  
+
+  const mensagemErro = exibirErro("Insira um valor numérico válido e positivo.");
+  atualizarMensagemErro(mensagemErro);
+
   // Função para obter valores de entrada e retorno de um objeto imutável
   const obterValores = () => {
     const valor = document.getElementById('valor').value;
