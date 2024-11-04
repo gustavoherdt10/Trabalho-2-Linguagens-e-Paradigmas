@@ -1,56 +1,46 @@
 const taxasCambio = {
-    "USD": 1,
-    "EUR": 0.85,
-    "GBP": 0.75,
-    "JPY": 110.49
-  };
-  
-  const calcularConversao = (valor, taxaOrigem, taxaDestino) => (valor / taxaOrigem) * taxaDestino;
-  
-  const validarEntrada = (entrada) => {
-    const valorNumerico = parseFloat(entrada);
-    return !isNaN(valorNumerico) && isFinite(valorNumerico) && valorNumerico > 0;
-  };
-  
-  const exibirErro = (mensagem) => mensagem;
+  "USD": 1,
+  "EUR": 0.85,
+};
 
-  const atualizarMensagemErro = (mensagem) => {
-    document.getElementById('mensagemErro').innerText = mensagem;
-  };
+const calcularConversao = (valor, taxaOrigem, taxaDestino) => 
+  (valor / taxaOrigem) * taxaDestino;
 
-  const mensagemErro = exibirErro("Insira um valor numérico válido e positivo.");
-  atualizarMensagemErro(mensagemErro);
+const validarEntrada = (entrada) => {
+  const valorNumerico = parseFloat(entrada);
+  return !isNaN(valorNumerico) && isFinite(valorNumerico) && valorNumerico > 0;
+};
 
-  const obterValores = (valor, moedaOrigem, moedaDestino) => ({
-    valor,
-    moedaOrigem,
-    moedaDestino
-  });
+const atualizarMensagemErro = (mensagem) => {
+  document.getElementById('mensagemErro').innerText = mensagem;
+};
 
-  const converterMoeda = () => {
-    const { valor, moedaOrigem, moedaDestino } = obterValores();
+const obterValores = () => ({
+  valor: document.getElementById('valor').value,
+  moedaOrigem: document.getElementById('moedaOrigem').value,
+  moedaDestino: document.getElementById('moedaDestino').value,
+});
 
-    if (!validarEntrada(valor)) {
-      exibirErro("Insira um valor numérico válido e positivo.");
+const converterMoeda = () => {
+  const { valor, moedaOrigem, moedaDestino } = obterValores();
+
+  if (!validarEntrada(valor)) {
+      atualizarMensagemErro("Insira um valor numérico válido e positivo.");
       return;
-    }
-  
-    exibirErro("");
+  }
+  atualizarMensagemErro("");
 
-    const resultado = calcularConversao(parseFloat(valor), taxasCambio[moedaOrigem], taxasCambio[moedaDestino]);
+  const resultado = calcularConversao(parseFloat(valor), taxasCambio[moedaOrigem], taxasCambio[moedaDestino]);
+  document.getElementById('resultado').innerText = `Valor convertido: ${resultado.toFixed(2)} ${moedaDestino}`;
+};
 
-    document.getElementById('resultado').innerText = `Valor convertido: ${resultado.toFixed(2)} ${moedaDestino}`;
-  };
+const gerarOpcoesMoeda = () => {
+  const opcoes = Object.keys(taxasCambio)
+      .map(moeda => `<option value="${moeda}">${moeda}</option>`)
+      .join('');
+  document.getElementById('moedaOrigem').innerHTML = opcoes;
+  document.getElementById('moedaDestino').innerHTML = opcoes;
+};
 
-  const gerarOpcoesMoeda = () => {
-    const opcoes = Object.keys(taxasCambio).map(
-      (moeda) => `<option value="${moeda}">${moeda}</option>`
-    );
-    document.getElementById('moedaOrigem').innerHTML = opcoes.join('');
-    document.getElementById('moedaDestino').innerHTML = opcoes.join('');
-  };
-  
-  gerarOpcoesMoeda();
-
-  document.getElementById('botaoConverter').addEventListener('click', converterMoeda);
-  
+gerarOpcoesMoeda();
+document.getElementById('botaoConverter').addEventListener('click', converterMoeda);
