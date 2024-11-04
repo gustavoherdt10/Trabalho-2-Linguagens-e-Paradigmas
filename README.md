@@ -41,21 +41,13 @@ O Conversor de Moedas é um sistema desenvolvido em HTML, CSS e JavaScript, que 
 
 O sistema foi projetado utilizando princípios de programação funcional:
 
-1. Funções Puras:
-- As funções, como calcularConversao e validarEntrada, são puras, o que significa que para um dado conjunto de entradas, sempre retornam o mesmo resultado, sem alterar variáveis fora de seu escopo.
-
-2. Imutabilidade: 
+- As funções, como calcularConversao e validarEntrada, são puras, o que significa que para um dado conjunto de entradas, sempre retornam o mesmo resultado, sem alterar variáveis fora de seu escopo. 
 - A entrada do usuário é manipulada de forma imutável; o valor original não é alterado diretamente, e novos valores são calculados com base nas funções puras.
-
-3. Funções de Ordem Superior:
 - A função gerarOpcoesMoeda usa map para gerar dinamicamente as opções de moedas no seletor, demonstrando o uso de funções de ordem superior para manipulação de listas.
 
 # COMO RODAR O PROGRAMA
 
-1. Pré-requisitos:
 - O programa é executado em um navegador web e não requer instalação de software adicional.
-
-2. Execução:
 - Abra o arquivo index.html em um navegador.
 - No campo “Valor”, insira o valor numérico desejado para conversão.
 - Selecione as moedas de origem e de destino usando os menus suspensos.
